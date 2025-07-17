@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Smart Goals Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="parentContainer">
+
+        <header id="head">
+            <span><img src="Logo.png" width="100" id="logoImg"></span>
+            <nav id="NavContainer">
+                <a href="#mainContent" onclick="openHome()">Home</a>
+                <a href="#AllGoals" onclick="openAllGoals()">All Goals</a>
+                <a href="#CompletedGoals" onclick="openCompletedGoals()">Completed</a>
+                <a href="#PendingGoals" onclick="openPendingGoals()">Pending</a>
+            </nav>
+            <span id="navIcon" onclick="openNav()">&#9776</span>
+            <span id="navCloseIcon" onclick="closeNav()">&#10005</span>
+            <span id="searchIcon" onclick="openInput()">&#128269</span>
+            <span id="modeIconDark" onclick="switchtoDark()">&#9789</span>
+            <span id="modeIconLight" onclick="switchtoLight()">&#9788</span>
+            <div class="childDiv1">
+                <input type="text" placeholder="Seach goals..." id="searchBar">
+                <button id="switchBtn" onclick="Switch()">Switch</button>
+            </div>
+            <div class="childDiv2">
+                <input type="text" placeholder="Seach goals..." id="search">
+                <span id="navClose" onclick="closeChildDiv2()">&#10005</span>
+            </div>
+        </header>
+
+        <aside>
+            <ul>
+                <li onclick="openAsideCards()" onmouseleave="categoryCheck('Health')"
+                    ontouchstart="categoryCheck('Health')">Health</li>
+                <li onclick="openAsideCards()" onmouseleave="categoryCheck('Carrer')"
+                    ontouchstart="categoryCheck('Health')">Carrer</li>
+                <li onclick="openAsideCards()" onmouseleave="categoryCheck('Finance')"
+                    ontouchstart="categoryCheck('Health')">Finance</li>
+                <li onclick="openAsideCards()" onmouseleave="categoryCheck('Personal')"
+                    ontouchstart="categoryCheck('Health')">Personal</li>
+            </ul>
+            <select id="sortOption">
+                <option onclick="sortbyOrder('Newest')">Newest</option>
+                <option onclick="sortbyOrder('Oldest')">Oldest</optison>
+                <option onclick="sortbyOrder('Alphabetically')">Alphabetically</option>
+            </select>
+        </aside>
+
+        <div id="mainContent">
+            <p class="mainContent1">
+                <span>"No Goals Yet!"</span>
+                <span>Start by adding your first goal.</span>
+            </p>
+            <p class="mainContent2" id="Arraybox">
+                "Success is the sum of small efforts, repeated by day in and day out".
+            </p>
+            <button id="add" onclick="formOpen()">[&#43 Add Your Goal]</button>
+        </div>
+
+        <div id="formContainer">
+            <form id="myForm">
+                <label for="title">Goal Title:</label><input type="text" id="title" required>
+                <br>
+                <label>Category:</label>
+                <div class="categoryGroup">
+                    <label for="category">Health</label>
+                    <input type="checkbox" id="category" value="Health" name="categoryName">
+                    <label for="category">Career</label>
+                    <input type="checkbox" id="category" value="Carrer" name="categoryName">
+                    <label for="category">Finance</label>
+                    <input type="checkbox" id="category" value="Finance" name="categoryName">
+                    <label for="category">Personal</label>
+                    <input type="checkbox" id="category" value="Personal" name="categoryName">
+                </div>
+                <br>
+                <label for="deadline">Deadline:</label><input type="date" id="deadline" placeholder="Select a date"
+                    required>
+                <br>
+                <label for="description">Description:</label><textarea id="description"></textarea>
+                <br>
+                <label>Priority:</label>
+                <div class="priorityGroup">
+                    <label for="priority">High</label>
+                    <input type="radio" id="priority" value="High" name="pgroup">
+                    <label for="priority">Medium</label>
+                    <input type="radio" id="priority" value="Medium" name="pgroup">
+                    <label for="priority">Low</label>
+                    <input type="radio" id="priority" value="Low" name="pgroup">
+                </div>
+                <div class="addcancelGroup">
+                    <button id="addBtn" onclick="goalAdded()">&#43 Add Your Goal</button>
+                    <button id="cancelBtn" onclick="formClose()">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="AllGoals"></div>
+
+        <div id="CompletedGoals"></div>
+
+        <div id="PendingGoals"></div>
+
+        <div id="asideContainer"></div>
+
+        <div id="searchedContent"></div>
+
+        <div id="aboutModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModals('aboutModal')">&times;</span>
+                <h2>About</h2>
+                <p>Hello! I'm Surbhi Mathur, a self-taught web developer passionate about building intuitive and helpful
+                    tools.</p>
+                <p>The <strong>Smart Goals Dashboard</strong> is designed to help users set, track, and manage goals
+                    efficiently.</p>
+            </div>
+        </div>
+
+        <div id="contactModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModals('contactModal')">&times;</span>
+                <h2>Contact</h2>
+                <p>Email:<a href="mailto:subhi3343@gmail.com">subhi3343@gmail.com</a></p>
+                <p>LinkedIn:<a href="https://www.linkedin.com/in/surbhi-mathur-729a54240/"
+                        target="_blank">linkedin.com/in/surbhimathur</a></p>
+            </div>
+        </div>
+
+        <div id="privacyModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModals('privacyModal')">&times;</span>
+                <h2>Privacy Policy</h2>
+                <p>This project does not collect any personal data. All data is stored locally on your device using
+                    LocalStorage.</p>
+                <p>You have complete control over your goals - they are not shared with anyone.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Surbhi Mathur | Built with &#128150 using HTML,CSS & JavaScript </p>
+            <nav>
+                <a href="#" onclick="openModals('aboutModal')">About</a>
+                <a href="#" onclick="openModals('contactModal')">Contact</a>
+                <a href="#" onclick="openModals('privacyModal')">Privacy</a>
+            </nav>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
